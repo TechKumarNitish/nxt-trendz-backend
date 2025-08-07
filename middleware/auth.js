@@ -6,7 +6,7 @@ require("dotenv").config();
 exports.auth=async(req,res,next)=>{
     try{
         //extract token
-        const token=req.cookies.token || request.body.token ||req.header("Authorisation").replace("Bearer ","");
+        const token=req.cookies.token || req.body.token ||req.header("Authorization").replace("Bearer ","");
 
         //if token is missing then return response
         if(!token){
@@ -31,6 +31,7 @@ exports.auth=async(req,res,next)=>{
         }
         next();
     }catch(err){
+        console.log(err)
         return res.status(401).json({
             success:false,
             message:"Something went worng while validating the token"
@@ -40,7 +41,7 @@ exports.auth=async(req,res,next)=>{
 //isStudent..............................................
 exports.isCustomer=async(req,res,next)=>{
     try{
-        if(req.user.accountType !=="Customer"){
+        if(req.user.accountType !=="customer"){
             return res.status(401).json({
                 success:false,
                 message:"This is a protected route for Customer only"
@@ -59,7 +60,7 @@ exports.isCustomer=async(req,res,next)=>{
 //isSuperAdmin...............................................
 exports.isSuperAdmin=async(req,res,next)=>{
     try{
-        if(req.user.accountType !=="Admin"){
+        if(req.user.accountType !=="super-admin"){
             return res.status(401).json({
                 success:false,
                 message:"This is a protected route for Super Admin only"

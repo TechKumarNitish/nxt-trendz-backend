@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+  _id: { type: String, required: true }, // using custom string _id
   title: { type: String, required: true },
   brand: { type: String },
   price: { type: Number, required: true },
@@ -10,7 +11,9 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
   total_reviews: { type: Number },
   availability: { type: String },
-  isPrime: { type: Boolean, required: true, default: false }  // <– flag to separate
+  category_id: { type: Number },
+  isPrime: { type: Boolean, required: true, default: false },
+  similar_products: [{ type: String, ref: 'Product' }] // referencing other products by ID
 });
 
 module.exports = mongoose.model('Product', productSchema);

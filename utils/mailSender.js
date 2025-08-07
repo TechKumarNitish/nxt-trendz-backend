@@ -25,6 +25,4 @@ const mailSender=async (email,title,body)=>{
     }
 }
 
-mailSender("rskbanm15a2015@gmail.com","title", "body")
-
 module.exports=mailSender;

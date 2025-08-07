@@ -5,7 +5,8 @@ const router = express.Router()
 // Import the required controllers and middleware functions
 const {
   login,
-  signUp
+  signUp,
+  googleLogin
 } = require("../controllers/Auth")
 
 
@@ -20,5 +21,7 @@ router.post("/login", login)
 
 // Route for user signup
 router.post("/signup", signUp)
+
+router.post("/google", googleLogin)
 
 module.exports = router
